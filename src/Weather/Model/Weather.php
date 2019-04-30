@@ -7,8 +7,15 @@ class Weather
     private $map = [
         1 => 'cloud',
         2 => 'cloud-rain',
-        3 => 'sun'
+        3 => 'sun',
+        'Cloudy' => 'cloud',
+        'Scattered Showers' => 'cloud-rain',
+        'Breezy' => 'wind',
+        'Partly Cloudy' => 'cloud-sun',
+        'Mostly Cloudy' => 'cloud',
+        'Sunny' => 'sun',
     ];
+
 
     /**
      * @var integer
@@ -101,7 +108,10 @@ class Weather
 
     public function getSkySymbol()
     {
-        return $this->map[$this->sky];
+        if (isset($this->sky))
+            return $this->map[$this->sky];
+        if (isset($this->weather))
+            return $this->map[$this->weather];
     }
 
     /**

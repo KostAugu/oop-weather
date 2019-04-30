@@ -105,10 +105,45 @@
     "text": "Sunny"
   },
   {
-    "date": "4 May 2019",
+    "date": "5 May 2019",
     "day": "Sun",
     "high": "20",
     "low": "15",
+    "text": "Partly Cloudy"
+  },
+  {
+    "date": "6 May 2019",
+    "day": "Sun",
+    "high": "22",
+    "low": "15",
+    "text": "Partly Cloudy"
+  },
+  {
+    "date": "7 May 2019",
+    "day": "Sun",
+    "high": "24",
+    "low": "15",
+    "text": "Mostly Cloudy"
+  },
+  {
+    "date": "8 May 2019",
+    "day": "Sun",
+    "high": "20",
+    "low": "15",
+    "text": "Sunny"
+  },
+  {
+    "date": "9 May 2019",
+    "day": "Sun",
+    "high": "25",
+    "low": "15",
+    "text": "Scattered Showers"
+  },
+  {
+    "date": "10 May 2019",
+    "day": "Sun",
+    "high": "18",
+    "low": "10",
     "text": "Partly Cloudy"
   }
 ]
