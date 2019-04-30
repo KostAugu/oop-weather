@@ -26,6 +26,11 @@ class Weather
     protected $sky;
 
     /**
+     * @var string
+     */
+    protected $weather;
+
+    /**
      * @var \DateTime
      */
     protected $date;
@@ -97,5 +102,21 @@ class Weather
     public function getSkySymbol()
     {
         return $this->map[$this->sky];
+    }
+
+    /**
+     * @return string
+     */
+    public function getWeather(): string
+    {
+        return $this->weather;
+    }
+
+    /**
+     * @param string $weather
+     */
+    public function setWeather(string $weather): void
+    {
+        $this->weather = $weather;
     }
 }

@@ -20,6 +20,25 @@ class GoogleApi
     }
 
     /**
+     * @return Weather
+     * @throws \Exception
+     */
+    public function getWeek()
+    {
+        $week = [];
+        $counter = 0;
+
+        while ($counter < 7) {
+            $day = $this->load(new NullWeather());
+            $day->setDate(new \DateTime("+" . $counter . "day"));
+            $week[] = $day;
+            $counter++;
+        }
+
+        return $week;
+    }
+
+    /**
      * @param Weather $before
      * @return Weather
      * @throws \Exception

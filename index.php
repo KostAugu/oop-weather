@@ -16,11 +16,23 @@ $twig = new Environment($loader, ['cache' => __DIR__ . '/cache', 'debug' => true
 $controller = new StartPage();
 switch ($request->getRequestUri()) {
     case '/week':
-        $renderInfo = $controller->getWeekWeather();
+        $renderInfo = $controller->getWeekWeather("DataApi");
+        break;
+    case '/weekWeather':
+        $renderInfo = $controller->getWeekWeather("WeatherApi");
+        break;
+    case '/weekGoogle':
+        $renderInfo = $controller->getWeekWeather("GoogleApi");
+        break;
+    case '/todayWeather':
+        $renderInfo = $controller->getTodayWeather("WeatherApi");
+        break;
+    case '/todayGoogle':
+        $renderInfo = $controller->getTodayWeather("GoogleApi");
         break;
     case '/':
     default:
-        $renderInfo = $controller->getTodayWeather();
+        $renderInfo = $controller->getTodayWeather("DataApi");
     break;
 }
 $renderInfo['context']['resources_dir'] = 'src/Weather/Resources';

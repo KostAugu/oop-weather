@@ -4,6 +4,8 @@ namespace Weather;
 
 use Weather\Api\DataProvider;
 use Weather\Api\DbRepository;
+use Weather\Api\GoogleApi;
+use Weather\Api\WeatherApi;
 use Weather\Model\Weather;
 
 class Manager
@@ -13,22 +15,45 @@ class Manager
      */
     private $transporter;
 
-    public function getTodayInfo(): Weather
+    public function getTodayInfo(string $dataSource): Weather
     {
-        return $this->getTransporter()->selectByDate(new \DateTime());
+        if ($dataSource === "DataApi")
+            return $this->getTransporter($dataSource)->selectByDate(new \DateTime());
+
+        if ($dataSource === "WeatherApi")
+            return $this->getTransporter($dataSource)->selectByDate(new \DateTime());
+
+        if ($dataSource === "GoogleApi")
+            return $this->getTransporter($dataSource)->getToday();
     }
 
-    public function getWeekInfo(): array
+    public function getWeekInfo(string $dataSource): array
     {
-        return $this->getTransporter()->selectByRange(new \DateTime('midnight'), new \DateTime('+6 days midnight'));
+        if ($dataSource === "DataApi")
+            return $this->getTransporter($dataSource)->selectByRange(new \DateTime('midnight'), new \DateTime('+6 days midnight'));
+
+        if ($dataSource === "WeatherApi")
+            return $this->getTransporter($dataSource)->selectByRange(new \DateTime('midnight'), new \DateTime('+6 days midnight'));
+
+        if ($dataSource === "GoogleApi")
+            return $this->getTransporter($dataSource)->getWeek();
     }
 
-    private function getTransporter()
+    private function getTransporter(string $dataSource)
     {
         if (null === $this->transporter) {
-            $this->transporter = new DbRepository();
+            switch ($dataSource) {
+                case "DataApi":
+                    $this->transporter = new DbRepository();
+                    break;
+                case "WeatherApi":
+                    $this->transporter = new WeatherApi();
+                    break;
+                case "GoogleApi":
+                    $this->transporter = new GoogleApi();
+                    break;
+            }
         }
-
         return $this->transporter;
     }
 }
