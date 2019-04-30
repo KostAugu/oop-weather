@@ -14,23 +14,22 @@ $loader = new FilesystemLoader('View', __DIR__ . '/src/Weather');
 $twig = new Environment($loader, ['cache' => __DIR__ . '/cache', 'debug' => true]);
 
 $controller = new StartPage();
-switch ($request->getRequestUri()) {
-    case '/week':
+switch ($request->query->get("weather")) {
+    case 'weekData':
         $renderInfo = $controller->getWeekWeather("DataApi");
         break;
-    case '/weekWeather':
+    case 'weekWeather':
         $renderInfo = $controller->getWeekWeather("WeatherApi");
         break;
-    case '/weekGoogle':
+    case 'weekGoogle':
         $renderInfo = $controller->getWeekWeather("GoogleApi");
         break;
-    case '/todayWeather':
+    case 'todayWeather':
         $renderInfo = $controller->getTodayWeather("WeatherApi");
         break;
-    case '/todayGoogle':
+    case 'todayGoogle':
         $renderInfo = $controller->getTodayWeather("GoogleApi");
         break;
-    case '/':
     default:
         $renderInfo = $controller->getTodayWeather("DataApi");
     break;
