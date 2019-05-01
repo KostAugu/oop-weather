@@ -2,8 +2,8 @@
 
 namespace Weather;
 
+use Weather\Api\DataApi;
 use Weather\Api\DataProvider;
-use Weather\Api\DbRepository;
 use Weather\Api\GoogleApi;
 use Weather\Api\WeatherApi;
 use Weather\Model\Weather;
@@ -44,7 +44,7 @@ class Manager
         if (null === $this->transporter) {
             switch ($dataSource) {
                 case "DataApi":
-                    $this->transporter = new DbRepository();
+                    $this->transporter = new DataApi();
                     break;
                 case "WeatherApi":
                     $this->transporter = new WeatherApi();

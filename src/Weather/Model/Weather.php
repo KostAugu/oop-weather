@@ -106,7 +106,7 @@ class Weather
         $this->date = $date;
     }
 
-    public function getSkySymbol()
+    public function getSkySymbol(): string
     {
         if (isset($this->sky))
             return $this->map[$this->sky];

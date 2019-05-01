@@ -4,7 +4,7 @@ namespace Weather\Api;
 
 use Weather\Model\Weather;
 
-class WeatherApi extends DbRepository
+class DataApi extends DbRepository
 {
     /**
      * @return Weather[]
@@ -14,15 +14,15 @@ class WeatherApi extends DbRepository
     {
         $result = [];
         $data = json_decode(
-            file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'Db' . DIRECTORY_SEPARATOR . 'Weather.json'),
+            file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'Db' . DIRECTORY_SEPARATOR . 'Data.json'),
             true
         );
         foreach ($data as $item) {
             $record = new Weather();
             $record->setDate(new \DateTime($item['date']));
-            $record->setDayTemp($item['high']);
-            $record->setNightTemp($item['low']);
-            $record->setWeather($item['text']);
+            $record->setDayTemp($item['dayTemp']);
+            $record->setNightTemp($item['nightTemp']);
+            $record->setSky($item['sky']);
             $result[] = $record;
         }
 

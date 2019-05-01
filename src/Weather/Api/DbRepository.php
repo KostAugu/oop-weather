@@ -25,6 +25,11 @@ class DbRepository implements DataProvider
         return $result;
     }
 
+    /**
+     * @param \DateTime $from
+     * @param \DateTime $to
+     * @return array
+     */
     public function selectByRange(\DateTime $from, \DateTime $to): array
     {
         $items = $this->selectAll();
@@ -39,25 +44,10 @@ class DbRepository implements DataProvider
         return $result;
     }
 
-    /**
-     * @return Weather[]
-     */
-    private function selectAll(): array
+    protected function selectAll(): array
     {
-        $result = [];
-        $data = json_decode(
-            file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'Db' . DIRECTORY_SEPARATOR . 'Data.json'),
-            true
-        );
-        foreach ($data as $item) {
-            $record = new Weather();
-            $record->setDate(new \DateTime($item['date']));
-            $record->setDayTemp($item['dayTemp']);
-            $record->setNightTemp($item['nightTemp']);
-            $record->setSky($item['sky']);
-            $result[] = $record;
-        }
-
-        return $result;
+        return [];
     }
+
+
 }
